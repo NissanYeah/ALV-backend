@@ -4,17 +4,12 @@ const app = express()
 const bodyParser = require('body-parser')
 const cors = require('cors')
 
-const corsOptions = process.env.NODE_ENV == "development" ? 
-{
+const corsOptions = {
   "origin": "*",
   "methods": "GET,HEAD,PUT,PATCH,POST,DELETE",
   "preflightContinue": false,
   "optionsSuccessStatus": 204
-} : {
-  "origin": ['http://avl-exam.surge.sh/'],
-  "optionsSuccessStatus": 200 // some legacy browsers (IE11, various SmartTVs) choke on 204
-}
-
+} 
 
 app.use(bodyParser.json());
 app.use('/mail', cors(corsOptions),require('./routes/mail'))
